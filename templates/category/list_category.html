@@ -1,0 +1,127 @@
+{% extends 'main/index.html' %}
+
+
+{% block content %}
+<div class="container-fluid group-data-[content=boxed]:max-w-boxed mx-auto">
+
+    <div class="flex flex-col gap-2 py-4 md:flex-row md:items-center print:hidden">
+        <div class="grow">
+            <h5 class="text-16">Leave Manage (Employee)</h5>
+        </div>
+        <ul class="flex items-center gap-2 text-sm font-normal shrink-0">
+            <li class="relative before:content-['\ea54'] before:font-remix ltr:before:-right-1 rtl:before:-left-1  before:absolute before:text-[18px] before:-top-[3px] ltr:pr-4 rtl:pl-4 before:text-slate-400 dark:text-zink-200">
+                <a href="#!" class="text-slate-400 dark:text-zink-200">Leaves Manage</a>
+            </li>
+            <li class="text-slate-700 dark:text-zink-100">
+                Leave Manage (Employee)
+            </li>
+        </ul>
+    </div>
+    <div class="grid grid-cols-1 gap-x-5 md:grid-cols-2 xl:grid-cols-12">
+        <div class="xl:col-span-6">
+            <div class="card">
+                <div class="flex items-center gap-3 card-body">
+                    <div class="flex items-center justify-center text-green-500 bg-green-100 rounded-md size-12 text-15 dark:bg-green-500/20 shrink-0"><i class="fas fa-toggle-on" style="font-size: 23px;"></i></div>
+                    <div class="grow">
+                        <h5 class="mb-1 text-16"><span class="counter-value" data-target="{{category_list.0.get_status_number.status_active}}">{{category_list.0.get_status_number.status_active}}</span></h5>
+                        <p class="text-slate-500 dark:text-zink-200">Active category</p>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+        <div class="xl:col-span-6">
+            <div class="card">
+                <div class="flex items-center gap-3 card-body">
+                    <div class="flex items-center justify-center text-red-500 bg-red-100 rounded-md size-12 text-15 dark:bg-red-500/20 shrink-0"><i class="fal fa-toggle-on" style="font-size: 23px;"></i></div>
+                    <div class="grow">
+                        <h5 class="mb-1 text-16"><span class="counter-value" data-target="{{category_list.0.get_status_number.status_inactive}}">{{category_list.0.get_status_number.status_inactive}}</span></h5>
+                        <p class="text-slate-500 dark:text-zink-200">Inactive category</p>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+    </div><!--end grid-->
+
+    <div class="card" id="ordersTable">
+        <div class="card-body">
+            <div class="grid grid-cols-1 gap-4 mb-5 lg:grid-cols-2 xl:grid-cols-12">
+                <div class="xl:col-span-3">
+                    <div class="relative">
+                    </div>
+                </div><!--end col-->
+                <div class="xl:col-span-2 xl:col-start-11">
+                    <div class="ltr:lg:text-right rtl:lg:text-left">
+                        <a href="apps-hr-create-leave.html" type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" class="lucide lucide-plus inline-block size-4"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> <span class="align-middle">Add Leave</span></a>
+                    </div>
+                </div>
+            </div><!--col grid-->
+            <div class="overflow-x-auto">
+                <div class="overflow-x-auto">
+                    <table class="w-full whitespace-nowrap">
+                        <thead class="ltr:text-left rtl:text-right bg-slate-100 text-slate-500 dark:bg-zink-600 dark:text-zink-200">
+                            <tr>
+                                <th class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500">#</th>
+                                <th class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500">Icon</th>
+                                <th class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500">name</th>
+                                <th class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500">Slug</th>
+                                <th class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500">Created_at</th>
+                                <th class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500">Status</th>
+                                <th class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-right rtl:text-left">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for q in category_list%}                           
+                                <tr>
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">{{forloop.counter}}</td>
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500"><i class="{{q.icons}}"></i></td>
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">{{q.name}}</td>
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">{{q.slug}}</td>
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">{{ q.created_at|date:"Y/m/d" }}</td>
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
+                                        
+                                        {% if q.status %}
+                                        <span class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent">Approved</span>
+                                        {% else %}
+                                        <span class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-red-100 border-transparent text-red-500 dark:bg-red-500/20 dark:border-transparent">Declined</span>
+                                        {% endif %}     
+                                    </td>
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
+                                        <div class="flex justify-end gap-2">
+                                            <a href="#!" data-modal-target="leaveOverviewModal" class="flex items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 text-custom-500 bg-custom-100 hover:text-white hover:bg-custom-500 dark:bg-custom-500/20 dark:hover:bg-custom-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="info" class="lucide lucide-info size-4"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></a>
+                                        </div>
+                                    </td>
+                                </tr>                              
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="flex flex-col items-center mt-5 md:flex-row">
+                <div class="mb-4 grow md:mb-0">
+                    <p class="text-slate-500 dark:text-zink-200">Showing <b>10</b> of <b>17</b> Results</p>
+                </div>
+                <ul class="flex flex-wrap items-center gap-2 shrink-0">
+                    <li>
+                        <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 h-8 px-3 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&amp;.active]:text-custom-500 dark:[&amp;.active]:text-custom-500 [&amp;.active]:bg-custom-50 dark:[&amp;.active]:bg-custom-500/10 [&amp;.active]:border-custom-50 dark:[&amp;.active]:border-custom-500/10 [&amp;.active]:hover:text-custom-700 dark:[&amp;.active]:hover:text-custom-700 [&amp;.disabled]:text-slate-400 dark:[&amp;.disabled]:text-zink-300 [&amp;.disabled]:cursor-auto"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-left" class="lucide lucide-chevron-left mr-1 size-4 rtl:rotate-180"><path d="m15 18-6-6 6-6"></path></svg> Prev</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 size-8 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&amp;.active]:text-custom-500 dark:[&amp;.active]:text-custom-500 [&amp;.active]:bg-custom-50 dark:[&amp;.active]:bg-custom-500/10 [&amp;.active]:border-custom-50 dark:[&amp;.active]:border-custom-500/10 [&amp;.active]:hover:text-custom-700 dark:[&amp;.active]:hover:text-custom-700 [&amp;.disabled]:text-slate-400 dark:[&amp;.disabled]:text-zink-300 [&amp;.disabled]:cursor-auto">1</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 size-8 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&amp;.active]:text-custom-500 dark:[&amp;.active]:text-custom-500 [&amp;.active]:bg-custom-50 dark:[&amp;.active]:bg-custom-500/10 [&amp;.active]:border-custom-50 dark:[&amp;.active]:border-custom-500/10 [&amp;.active]:hover:text-custom-700 dark:[&amp;.active]:hover:text-custom-700 [&amp;.disabled]:text-slate-400 dark:[&amp;.disabled]:text-zink-300 [&amp;.disabled]:cursor-auto active">2</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 size-8 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&amp;.active]:text-custom-500 dark:[&amp;.active]:text-custom-500 [&amp;.active]:bg-custom-50 dark:[&amp;.active]:bg-custom-500/10 [&amp;.active]:border-custom-50 dark:[&amp;.active]:border-custom-500/10 [&amp;.active]:hover:text-custom-700 dark:[&amp;.active]:hover:text-custom-700 [&amp;.disabled]:text-slate-400 dark:[&amp;.disabled]:text-zink-300 [&amp;.disabled]:cursor-auto">3</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="inline-flex items-center justify-center bg-white dark:bg-zink-700 h-8 px-3 transition-all duration-150 ease-linear border rounded border-slate-200 dark:border-zink-500 text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500 hover:bg-custom-50 dark:hover:bg-custom-500/10 focus:bg-custom-50 dark:focus:bg-custom-500/10 focus:text-custom-500 dark:focus:text-custom-500 [&amp;.active]:text-custom-500 dark:[&amp;.active]:text-custom-500 [&amp;.active]:bg-custom-50 dark:[&amp;.active]:bg-custom-500/10 [&amp;.active]:border-custom-50 dark:[&amp;.active]:border-custom-500/10 [&amp;.active]:hover:text-custom-700 dark:[&amp;.active]:hover:text-custom-700 [&amp;.disabled]:text-slate-400 dark:[&amp;.disabled]:text-zink-300 [&amp;.disabled]:cursor-auto">Next <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right ml-1 size-4 rtl:rotate-180"><path d="m9 18 6-6-6-6"></path></svg></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
+    
